@@ -1,0 +1,1179 @@
+# HERMES-Modell — einzige Quelle für den HERMES Explorer und die Referenzen des HERMES-Skills.
+# Pflege: Ergebnisse unter «ergebnisse» ergänzen oder ändern, danach `python scripts/validate.py` und
+# `python scripts/build_skill_refs.py` ausführen. Schema siehe README.md.
+
+schema_version: 1
+methode: HERMES 2022
+ausgabe: "Referenzhandbuch Projektmanagement, Ausgabe März 2026"
+
+quellen:
+  - "Ergebnisse, Module, Phasen und Abhängigkeiten mit Basis «phasenmodell»: Übersichtsgrafik «HERMES-Phasenmodell für klassische und agile Projekte». Sammelpfeile der Grafik sind als Einzelabhängigkeiten abgebildet."
+  - "Zweck und Gliederung mit zweck_quelle «referenz»: HERMES-Skill-Referenz dokumente.md. Übrige Zweckangaben sind sinngemässe Kurzbeschriebe."
+  - "Szenario-Zuordnung der Module: Modulmatrix aus szenarien_rollen.md. Sizing und Tailoring sind nicht abgebildet."
+  - "Wissensobjekte und Lese-/Schreibrollen: Knowledge-Schema v0.4 der Generierungspipeline."
+  - "Abhängigkeiten mit Basis «pipeline» sind Designentscheidungen der Generierungspipeline, nicht Teil von HERMES."
+
+phasen:
+  - {id: initialisierung, name: Initialisierung}
+  - {id: konzept, name: Konzept}
+  - {id: realisierung, name: Realisierung}
+  - {id: einfuehrung, name: Einführung}
+  - {id: abschluss, name: Abschluss}
+  - {id: phasenunabhaengig, name: Phasenunabhängig}
+agil:
+  umsetzung: {name: "Umsetzung (agil)", ersetzt: [konzept, realisierung, einfuehrung]}
+
+szenarien:
+  - {id: it_entwicklung, name: "IT-Entwicklung"}
+  - {id: it_adaption, name: "IT-Adaption"}
+  - {id: dlp_entwicklung, name: "Dienstleistung/Produkt Entwicklung"}
+  - {id: dlp_adaption, name: "Dienstleistung/Produkt Adaption"}
+  - {id: organisationsanpassung, name: "Organisationsanpassung"}
+
+module:
+  - id: projektsteuerung
+    name: "Projektsteuerung · Projektführung"
+    szenarien: [it_entwicklung, it_adaption, dlp_entwicklung, dlp_adaption, organisationsanpassung]
+  - id: projektgrundlagen
+    name: "Projektgrundlagen"
+    szenarien: [it_entwicklung, it_adaption, dlp_entwicklung, dlp_adaption, organisationsanpassung]
+  - id: organisation
+    name: "Organisation"
+    szenarien: [it_entwicklung, it_adaption, dlp_entwicklung, dlp_adaption, organisationsanpassung]
+  - id: produkt
+    name: "Produkt"
+    szenarien: [dlp_entwicklung, dlp_adaption]
+  - id: it_system
+    name: "IT-System"
+    szenarien: [it_entwicklung, it_adaption]
+  - id: beschaffung
+    name: "Beschaffung"
+    szenarien: [it_entwicklung, it_adaption, dlp_entwicklung, dlp_adaption, organisationsanpassung]
+  - id: testen
+    name: "Testen"
+    szenarien: [it_entwicklung, it_adaption, dlp_entwicklung, dlp_adaption]
+  - id: einfuehrungsorganisation
+    name: "Einführungsorganisation"
+    szenarien: [it_entwicklung, it_adaption, dlp_entwicklung, dlp_adaption, organisationsanpassung]
+  - id: it_migration
+    name: "IT-Migration"
+    szenarien: [it_entwicklung, it_adaption]
+  - id: it_betrieb
+    name: "IT-Betrieb"
+    szenarien: [it_entwicklung, it_adaption]
+  - id: isds
+    name: "ISDS"
+    szenarien: [it_entwicklung, it_adaption]
+
+phasentore:
+  - {entscheid: Projektinitialisierungsfreigabe, ergebnis: projektinitialisierungsauftrag, gilt_ab: initialisierung}
+  - {entscheid: Durchführungsfreigabe, ergebnis: durchfuehrungsauftrag, gilt_ab: konzept}
+
+pipeline_status:
+  prototyp: "Prototyp"
+  naechste_session: "Nächste Session"
+  geplant: "Geplant"
+  roadmap: "Roadmap"
+
+wissensobjekte:
+  - {id: stakeholder, name: "Stakeholder & Rollen", gruppe: "Kern", querschnitt: true}
+  - {id: phase_execution, name: "Termine & Meilensteine", gruppe: "Kern"}
+  - {id: kosten, name: "Kosten & Budget", gruppe: "Kern", hinweis: "Im Knowledge-Schema v0.4 noch nicht als eigener Typ definiert."}
+  - {id: ausgangslage, name: "Ausgangslage", gruppe: "Geschäftskontext", querschnitt: true}
+  - {id: ziel, name: "Ziele", gruppe: "Geschäftskontext"}
+  - {id: rahmenbedingung, name: "Rahmenbedingungen", gruppe: "Geschäftskontext"}
+  - {id: anforderung, name: "Anforderungen", gruppe: "Geschäftskontext"}
+  - {id: loesungsvariante, name: "Lösungsvariante & Szenario", gruppe: "Geschäftskontext"}
+  - {id: entscheid, name: "Entscheide", gruppe: "Geschäftskontext"}
+  - {id: rechtl_grundlage, name: "Rechtliche Grundlagen", gruppe: "Geschäftskontext"}
+  - {id: beschaffungsgegenstand, name: "Beschaffungsgegenstand", gruppe: "Beschaffung"}
+  - {id: anbieter, name: "Anbieter", gruppe: "Beschaffung"}
+  - {id: zuschlag, name: "Zuschlag", gruppe: "Beschaffung"}
+  - {id: vertrag, name: "Vertrag", gruppe: "Beschaffung"}
+  - {id: systemkomponente, name: "Systemkomponenten", gruppe: "Technik"}
+  - {id: schnittstelle, name: "Schnittstellen", gruppe: "Technik"}
+  - {id: datenkategorie, name: "Datenkategorien", gruppe: "Technik"}
+  - {id: benutzergruppe, name: "Benutzergruppen & Organisation", gruppe: "Technik"}
+  - {id: betriebsumgebung, name: "Betriebsumgebung", gruppe: "Technik"}
+  - {id: technische_anforderung, name: "Technische Anforderungen", gruppe: "Technik"}
+  - {id: supportprozess, name: "Support & Service Levels", gruppe: "Betrieb & Einführung"}
+  - {id: backup_konzept, name: "Backup & Recovery", gruppe: "Betrieb & Einführung"}
+  - {id: berechtigungsrolle, name: "Berechtigungsrollen", gruppe: "Betrieb & Einführung"}
+  - {id: testfall, name: "Testfälle", gruppe: "Betrieb & Einführung"}
+  - {id: migrationsschritt, name: "Migrationsschritte", gruppe: "Betrieb & Einführung"}
+  - {id: schulungseinheit, name: "Schulungseinheiten", gruppe: "Betrieb & Einführung"}
+  - {id: risiko, name: "Risiken", gruppe: "Risiko & Compliance", querschnitt: true}
+  - {id: datenschutz_anforderung, name: "Datenschutzanforderungen", gruppe: "Risiko & Compliance"}
+  - {id: sicherheitsanforderung, name: "Sicherheitsanforderungen", gruppe: "Risiko & Compliance"}
+  - {id: offener_punkt, name: "Offene Punkte & Pendenzen", gruppe: "Risiko & Compliance", querschnitt: true}
+  - {id: erfahrung, name: "Projekterfahrungen", gruppe: "Risiko & Compliance"}
+
+ergebnisse:
+
+  # ---------- Initialisierung ----------
+  - id: projektinitialisierungsauftrag
+    name: "Projektinitialisierungsauftrag"
+    kurz: PIA
+    typ: dokument
+    herkunft: hermes
+    phase: initialisierung
+    module: [projektsteuerung]
+    entscheid: "Projektinitialisierungsfreigabe"
+    pipeline_status: prototyp
+    zweck: "Verbindliche Grundlage für die Freigabe der Phase Initialisierung. Vereinbarung zwischen Auftraggeber und Projektleiter für diese Phase."
+    zweck_quelle: referenz
+    gliederung:
+      - "Ausgangslage"
+      - "Ziele der Phase Initialisierung"
+      - "Rahmenbedingungen"
+      - "Ressourcenbedarf (Personalaufwand, Sachmittel, Kosten)"
+      - "Termine"
+      - "Projektorganisation und Personal"
+      - "Kommunikation"
+      - "Risiken"
+    wissen:
+      schreibt: [ausgangslage, rahmenbedingung, stakeholder, phase_execution, kosten, risiko]
+  - id: stakeholderliste
+    name: "Stakeholderliste"
+    typ: dokument
+    herkunft: hermes
+    phase: initialisierung
+    module: [projektsteuerung]
+    zweck: "Grundlage für das Managen der Stakeholder und die Kommunikationsplanung. Wird im Projektverlauf kontinuierlich weitergeführt."
+    zweck_quelle: referenz
+    hinweis: "Im Phasenmodell zusätzlich als phasenunabhängiges Ergebnis geführt."
+    gliederung:
+      - "Stakeholder (Name, Funktion, Organisation, Kontakt, Rolle im Projekt, Einfluss, Interesse)"
+    wissen:
+      ergaenzt: [stakeholder]
+      liest: [ausgangslage]
+    voraussetzungen:
+      - {id: projektinitialisierungsauftrag, basis: phasenmodell}
+  - id: rechtsgrundlagenanalyse
+    name: "Rechtsgrundlagenanalyse"
+    typ: dokument
+    herkunft: hermes
+    phase: initialisierung
+    module: [projektgrundlagen]
+    zweck: "Klärt die für das Vorhaben massgebenden rechtlichen Grundlagen."
+    zweck_quelle: sinngemaess
+    wissen:
+      schreibt: [rechtl_grundlage]
+      liest: [ausgangslage, rahmenbedingung]
+    voraussetzungen:
+      - {id: stakeholderliste, basis: phasenmodell}
+  - id: studie
+    name: "Studie"
+    typ: dokument
+    herkunft: hermes
+    phase: initialisierung
+    module: [projektgrundlagen]
+    entscheid: "Weiteres Vorgehen"
+    pipeline_status: geplant
+    zweck: "Beschreibt die angestrebte Lösung, bewertet Lösungsvarianten und entspricht dem Business-Case. Grundlage für den Entscheid «Weiteres Vorgehen»."
+    zweck_quelle: referenz
+    gliederung:
+      - "Ausgangslage"
+      - "Standortbestimmung aus geschäftlicher Sicht"
+      - "Analyse und Bewertung (Ziele, Rahmenbedingungen, Grobanforderungen)"
+      - "Lösungsvarianten"
+      - "Vorschlag und Entscheid weiteres Vorgehen (Variante, Szenario, Vorgehensweise)"
+      - "Planung und Termine"
+    wissen:
+      schreibt: [ziel, loesungsvariante, anforderung, systemkomponente, entscheid]
+      ergaenzt: [ausgangslage, rahmenbedingung, kosten, risiko, phase_execution, datenkategorie]
+      liest: [stakeholder, rechtl_grundlage]
+    voraussetzungen:
+      - {id: stakeholderliste, basis: phasenmodell}
+      - {id: rechtsgrundlagenanalyse, basis: phasenmodell}
+      - {id: schutzbedarfsanalyse, basis: phasenmodell}
+  - id: schutzbedarfsanalyse
+    name: "Schutzbedarfsanalyse"
+    typ: dokument
+    herkunft: hermes
+    phase: initialisierung
+    module: [projektgrundlagen]
+    zweck: "Erhebt den Schutzbedarf der Informationen und Daten des Vorhabens."
+    zweck_quelle: sinngemaess
+    wissen:
+      schreibt: [datenkategorie]
+      ergaenzt: [risiko]
+      liest: [ausgangslage, rechtl_grundlage]
+    voraussetzungen:
+      - {id: stakeholderliste, basis: phasenmodell}
+  - id: beschaffungsanalyse
+    name: "Beschaffungsanalyse"
+    typ: dokument
+    herkunft: hermes
+    phase: initialisierung
+    module: [projektgrundlagen]
+    pipeline_status: roadmap
+    zweck: "Beschreibt Handlungsbedarf, Marktanalyse und Beschaffungsverfahren. Ergänzt die Studie als Grundlage für die Entscheidung zur Projektfortsetzung."
+    zweck_quelle: referenz
+    gliederung:
+      - "Grund für die Beschaffung / Handlungsbedarf"
+      - "Beschaffungsinhalte"
+      - "Anbieter und Lieferanten"
+      - "Rollen und Verantwortung"
+      - "Terminliche Aspekte"
+      - "Finanzielle Aspekte / Vorkalkulation"
+      - "Beschaffungsrechtliche Aspekte"
+      - "Beschaffungsplan"
+      - "Ausschreibungsverfahren"
+      - "Vorgehen bei Fragen zur Ausschreibung"
+    wissen:
+      schreibt: [beschaffungsgegenstand, anbieter]
+      ergaenzt: [kosten, phase_execution]
+      liest: [ausgangslage, stakeholder, rechtl_grundlage]
+    voraussetzungen:
+      - {id: stakeholderliste, basis: phasenmodell}
+  - id: projektmanagementplan
+    name: "Projektmanagementplan"
+    typ: dokument
+    herkunft: hermes
+    phase: initialisierung
+    module: [projektsteuerung]
+    zweck: "Gesamtplanung des Projekts inkl. Regelungen zu Methoden, Rollen und Hilfsmitteln. Erste Version in der Initialisierung, danach phasenunabhängig nachgeführt."
+    zweck_quelle: referenz
+    gliederung:
+      - "Projektbeschreibung"
+      - "Durchführungsorganisation"
+      - "Projektergebnisstruktur"
+      - "Qualitätsziele und -vorgaben"
+      - "Prüfplan (QS)"
+      - "Durchführungsplanung (Termine, Releases, Kosten, Ressourcen, Beschaffung, Kommunikation, Reporting, Stakeholder)"
+      - "Vorgaben, Methoden und Werkzeuge"
+    wissen:
+      ergaenzt: [stakeholder, phase_execution, kosten]
+      liest: [ausgangslage, ziel, loesungsvariante, rahmenbedingung]
+    voraussetzungen:
+      - {id: studie, basis: phasenmodell}
+      - {id: beschaffungsanalyse, basis: phasenmodell}
+  - id: durchfuehrungsauftrag
+    name: "Durchführungsauftrag"
+    kurz: DA
+    typ: dokument
+    herkunft: hermes
+    phase: initialisierung
+    module: [projektsteuerung]
+    entscheid: "Durchführungsfreigabe"
+    pipeline_status: roadmap
+    zweck: "Rahmen und verbindliche Grundlage für die Lösungsentstehung. Autorisiert die Projektfortsetzung; Vereinbarung zwischen Auftraggeber und Projektleiter."
+    zweck_quelle: referenz
+    gliederung:
+      - "Ausgangslage und Handlungsbedarf"
+      - "Ziele (Lösungs- und Projektvorgehensziele)"
+      - "Rahmenbedingungen, Strategiebezug und Abgrenzungen"
+      - "Zusammenfassende Lösungsbeschreibung"
+      - "Rechtliche Grundlagen"
+      - "Investitionsbedarf"
+      - "Ressourcen- und Hilfsmittelbedarf"
+      - "Kosten/Nutzen/Wirtschaftlichkeit (Vorschau)"
+      - "Planung und Organisation"
+      - "Risiken"
+      - "Konsequenzen"
+      - "Verbindlichkeiten"
+    wissen:
+      schreibt: [entscheid]
+      ergaenzt: [ziel, kosten, risiko, rechtl_grundlage]
+      liest: [ausgangslage, stakeholder, loesungsvariante, rahmenbedingung, anforderung, phase_execution]
+    voraussetzungen:
+      - {id: projektmanagementplan, basis: phasenmodell}
+
+  # ---------- Konzept ----------
+  - id: situationsanalyse
+    name: "Situationsanalyse"
+    typ: dokument
+    herkunft: hermes
+    phase: konzept
+    module: [organisation, produkt, it_system]
+    zweck: "Beschreibt und analysiert die gegenwärtige Situation. Bildet die fachliche Basis für Lösungs- und Organisationsanforderungen; ziel- und lösungsneutral."
+    zweck_quelle: referenz
+    hinweis: "Erscheint im Phasenmodell in den Modulen Organisation, Produkt und IT-System."
+    gliederung:
+      - "Ausgangslage"
+      - "Ist-Organisation"
+      - "Beschreibung der bestehenden Lösung (Ist-System / Ist-Produkt)"
+      - "Beschreibung des Ist-Gesamtkontexts"
+      - "Stärken- und Schwächenanalyse"
+      - "Fazit und Handlungsbedarf"
+    wissen:
+      schreibt: [schnittstelle, benutzergruppe]
+      ergaenzt: [ausgangslage, systemkomponente, kosten]
+      liest: [stakeholder, ziel]
+  - id: organisationsanforderungen
+    name: "Organisationsanforderungen"
+    typ: dokument
+    herkunft: hermes
+    phase: konzept
+    module: [organisation]
+    zweck: "Anforderungen an die künftige Organisation, abgeleitet aus der Situationsanalyse."
+    zweck_quelle: sinngemaess
+    wissen:
+      ergaenzt: [anforderung, benutzergruppe]
+      liest: [ziel, ausgangslage]
+    voraussetzungen:
+      - {id: situationsanalyse, basis: phasenmodell}
+  - id: organisationskonzept
+    name: "Organisationskonzept"
+    typ: dokument
+    herkunft: hermes
+    phase: konzept
+    module: [organisation]
+    zweck: "Beschreibt die künftige Organisation, die mit der Lösung eingeführt wird."
+    zweck_quelle: sinngemaess
+    wissen:
+      ergaenzt: [benutzergruppe]
+      liest: [anforderung, ziel]
+    voraussetzungen:
+      - {id: organisationsanforderungen, basis: phasenmodell}
+  - id: geschaeftsmodellbeschreibung
+    name: "Geschäftsmodellbeschreibung"
+    typ: dokument
+    herkunft: hermes
+    phase: konzept
+    module: [organisation]
+    zweck: "Beschreibt das künftige Geschäftsmodell der betroffenen Organisation."
+    zweck_quelle: sinngemaess
+    wissen:
+      liest: [ziel, anforderung, benutzergruppe]
+    voraussetzungen:
+      - {id: organisationskonzept, basis: phasenmodell}
+  - id: prozessbeschreibung
+    name: "Prozessbeschreibung"
+    typ: dokument
+    herkunft: hermes
+    phase: konzept
+    module: [organisation]
+    zweck: "Beschreibt die künftigen Abläufe und Geschäftsprozesse."
+    zweck_quelle: sinngemaess
+    hinweis: "Wird in der Realisierung nachgeführt."
+    wissen:
+      ergaenzt: [benutzergruppe]
+      liest: [anforderung]
+    voraussetzungen:
+      - {id: geschaeftsmodellbeschreibung, basis: phasenmodell}
+  - id: organisationsbeschreibung
+    name: "Organisationsbeschreibung"
+    typ: dokument
+    herkunft: hermes
+    phase: konzept
+    module: [organisation]
+    zweck: "Beschreibt die künftige Aufbauorganisation mit Stellen und Rollen."
+    zweck_quelle: sinngemaess
+    hinweis: "Wird in der Realisierung nachgeführt."
+    wissen:
+      ergaenzt: [benutzergruppe, stakeholder]
+      liest: [anforderung]
+    voraussetzungen:
+      - {id: geschaeftsmodellbeschreibung, basis: phasenmodell}
+  - id: loesungsanforderungen
+    name: "Lösungsanforderungen"
+    typ: dokument
+    herkunft: hermes
+    phase: konzept
+    module: [produkt, it_system]
+    zweck: "Sämtliche fachlichen, technischen, rechtlichen und regulatorischen Anforderungen an das künftige System oder Produkt."
+    zweck_quelle: referenz
+    hinweis: "Erscheint in den Modulen Produkt und IT-System und speist die Konzepte der übrigen Module."
+    gliederung:
+      - "Grobanforderungen"
+      - "Anforderungskatalog"
+      - "Detaillierte Lösungsanforderungen"
+    wissen:
+      ergaenzt: [anforderung]
+      liest: [ziel, loesungsvariante, systemkomponente, schnittstelle, benutzergruppe, rechtl_grundlage]
+    voraussetzungen:
+      - {id: situationsanalyse, basis: phasenmodell}
+  - id: produktkonzept
+    name: "Produktkonzept"
+    typ: dokument
+    herkunft: hermes
+    phase: konzept
+    module: [produkt]
+    entscheid: "Produktkonzept"
+    zweck: "Beschreibt das künftige Produkt bzw. die Dienstleistung; wird iterativ bis zur Realisierung verfeinert."
+    zweck_quelle: sinngemaess
+    wissen:
+      schreibt: [entscheid]
+      liest: [anforderung, ziel, benutzergruppe]
+    voraussetzungen:
+      - {id: loesungsanforderungen, basis: phasenmodell}
+  - id: systemkonzept
+    name: "Systemkonzept"
+    typ: dokument
+    herkunft: hermes
+    phase: konzept
+    module: [it_system]
+    zweck: "Beschreibt das künftige IT-System auf konzeptioneller Ebene; wird iterativ bis zur Realisierung verfeinert."
+    zweck_quelle: sinngemaess
+    wissen:
+      ergaenzt: [systemkomponente, schnittstelle]
+      liest: [anforderung, loesungsvariante]
+    voraussetzungen:
+      - {id: loesungsanforderungen, basis: phasenmodell}
+  - id: loesungsarchitektur
+    name: "Lösungsarchitektur"
+    typ: dokument
+    herkunft: hermes
+    phase: konzept
+    module: [it_system]
+    entscheid: "Lösungsarchitektur"
+    pipeline_status: roadmap
+    zweck: "Beschreibt die Architektur der Lösung und ihre Einbettung in die bestehende Umgebung."
+    zweck_quelle: sinngemaess
+    wissen:
+      schreibt: [betriebsumgebung, technische_anforderung, entscheid]
+      ergaenzt: [systemkomponente, schnittstelle]
+      liest: [anforderung, loesungsvariante, rahmenbedingung]
+    voraussetzungen:
+      - {id: systemkonzept, basis: phasenmodell}
+  - id: integrationskonzept
+    name: "Integrationskonzept"
+    typ: dokument
+    herkunft: hermes
+    phase: konzept
+    module: [it_system]
+    zweck: "Beschreibt die Integration der Lösung in die bestehende Systemlandschaft."
+    zweck_quelle: sinngemaess
+    wissen:
+      ergaenzt: [schnittstelle]
+      liest: [systemkomponente, betriebsumgebung]
+    voraussetzungen:
+      - {id: loesungsarchitektur, basis: phasenmodell}
+      - {id: loesungsanforderungen, basis: phasenmodell}
+  - id: ausschreibungsunterlagen
+    name: "Ausschreibungsunterlagen"
+    typ: dokument
+    herkunft: hermes
+    phase: konzept
+    module: [beschaffung]
+    entscheid: "Ausschreibung"
+    pipeline_status: roadmap
+    zweck: "Alle Informationen, die im Rahmen einer Ausschreibung publiziert werden, inkl. Lastenheft mit Kriterienkatalog."
+    zweck_quelle: referenz
+    gliederung:
+      - "Lastenheft (Ausgangslage, Situationsbeschreibung, Soll-Zustand)"
+      - "Kriterienkatalog (Eignungs- und Zuschlagskriterien, Gewichtung und Punkte)"
+      - "Anhänge (AGB, Vertragsentwurf, Ausschreibungstext, weitere Unterlagen)"
+    wissen:
+      ergaenzt: [anforderung, beschaffungsgegenstand]
+      liest: [ausgangslage, systemkomponente, kosten, phase_execution, rechtl_grundlage, loesungsvariante]
+    voraussetzungen:
+      - {id: loesungsanforderungen, basis: phasenmodell}
+      - {id: organisationsanforderungen, basis: phasenmodell}
+      - {id: beschaffungsanalyse, basis: pipeline}
+  - id: evaluationsbericht
+    name: "Evaluationsbericht"
+    typ: dokument
+    herkunft: hermes
+    phase: konzept
+    module: [beschaffung]
+    entscheid: "Zuschlag"
+    pipeline_status: roadmap
+    zweck: "Fasst die Ergebnisse der Angebotsbewertung zusammen. Grundlage für den Entscheid Zuschlag."
+    zweck_quelle: referenz
+    gliederung:
+      - "Ausgangslage"
+      - "Vorgehen bei der Evaluation"
+      - "Ergebnisse der Evaluation"
+      - "Empfehlung"
+      - "Anträge"
+      - "Unterschriften"
+      - "Anhänge"
+    wissen:
+      schreibt: [zuschlag, entscheid]
+      ergaenzt: [anbieter]
+      liest: [anforderung, beschaffungsgegenstand, stakeholder, kosten]
+    voraussetzungen:
+      - {id: ausschreibungsunterlagen, basis: phasenmodell}
+  - id: vereinbarung
+    name: "Vereinbarung"
+    typ: dokument
+    herkunft: hermes
+    phase: konzept
+    module: [beschaffung]
+    zweck: "Regelt die Zusammenarbeit zwischen Projektbeteiligten, vorwiegend zwischen Anwender (Auftraggeber) und Ersteller."
+    zweck_quelle: referenz
+    hinweis: "Im Phasenmodell zusätzlich als phasenunabhängiges Ergebnis geführt."
+    gliederung:
+      - "Einführung"
+      - "Vertragsbestandteile"
+      - "Geltungsbereich"
+      - "Leistungsumfang und Ergebnisse"
+      - "Eingesetzte Personen"
+      - "Mitwirkungspflichten"
+      - "Qualitätssicherung und Abnahme"
+      - "Gewährleistung"
+      - "Datenschutz und Datensicherheit"
+      - "Änderungsmanagement"
+      - "Rapportierung"
+      - "Aufwand und Kosten"
+      - "Unterschriften"
+    wissen:
+      schreibt: [vertrag]
+      liest: [zuschlag, anbieter, anforderung, kosten, datenschutz_anforderung]
+    voraussetzungen:
+      - {id: evaluationsbericht, basis: phasenmodell}
+  - id: testkonzept
+    name: "Testkonzept"
+    typ: dokument
+    herkunft: hermes
+    phase: konzept
+    module: [testen]
+    zweck: "Legt Teststrategie, Testorganisation und Testumfang fest."
+    zweck_quelle: sinngemaess
+    hinweis: "Wird in der Realisierung nach dem Testprotokoll und im Abschluss nachgeführt."
+    wissen:
+      schreibt: [testfall]
+      ergaenzt: [risiko]
+      liest: [anforderung, technische_anforderung, systemkomponente]
+    voraussetzungen:
+      - {id: loesungsanforderungen, basis: phasenmodell}
+  - id: einfuehrungskonzept
+    name: "Einführungskonzept"
+    typ: dokument
+    herkunft: hermes
+    phase: konzept
+    module: [einfuehrungsorganisation]
+    zweck: "Beschreibt Massnahmen für die Lösungseinführung inkl. Changemanagement, Ausbildungskonzept und Abnahmeplanung."
+    zweck_quelle: referenz
+    gliederung:
+      - "Ausgangslage"
+      - "Betroffenheitsanalyse"
+      - "Einführungsvorgehen"
+      - "Einführungsmassnahmen (Change-, Transitions-, Notfallmassnahmen)"
+      - "Ausbildungskonzept"
+      - "Einführungsorganisation"
+      - "Einführungsplanung"
+      - "Planung der Vorabnahme und Abnahme"
+    wissen:
+      schreibt: [schulungseinheit]
+      ergaenzt: [risiko, benutzergruppe]
+      liest: [stakeholder, migrationsschritt, anforderung]
+    voraussetzungen:
+      - {id: loesungsanforderungen, basis: phasenmodell}
+      - {id: organisationsanforderungen, basis: phasenmodell}
+  - id: migrationskonzept
+    name: "Migrationskonzept"
+    typ: dokument
+    herkunft: hermes
+    phase: konzept
+    module: [it_migration]
+    zweck: "Beschreibt Vorgehen und Schritte der Migration vom Alt- ins Neusystem."
+    zweck_quelle: sinngemaess
+    wissen:
+      schreibt: [migrationsschritt]
+      ergaenzt: [risiko]
+      liest: [systemkomponente, schnittstelle, datenkategorie, betriebsumgebung]
+    voraussetzungen:
+      - {id: loesungsanforderungen, basis: phasenmodell}
+  - id: betriebskonzept
+    name: "Betriebskonzept"
+    typ: dokument
+    herkunft: hermes
+    phase: konzept
+    module: [it_betrieb]
+    zweck: "Beschreibt, wie die Lösung nach der Einführung betrieben wird."
+    zweck_quelle: sinngemaess
+    wissen:
+      schreibt: [supportprozess, backup_konzept]
+      ergaenzt: [betriebsumgebung, risiko]
+      liest: [systemkomponente, schnittstelle, stakeholder, sicherheitsanforderung]
+    voraussetzungen:
+      - {id: loesungsanforderungen, basis: phasenmodell}
+  - id: service_level_agreement
+    name: "Service Level Agreement"
+    kurz: SLA
+    typ: dokument
+    herkunft: hermes
+    phase: konzept
+    module: [it_betrieb]
+    zweck: "Vereinbart die Service Levels für den Betrieb der Lösung."
+    zweck_quelle: sinngemaess
+    wissen:
+      ergaenzt: [supportprozess]
+      liest: [betriebsumgebung, systemkomponente, stakeholder, kosten]
+    voraussetzungen:
+      - {id: betriebskonzept, basis: phasenmodell}
+  - id: isds_konzept
+    name: "ISDS-Konzept"
+    typ: dokument
+    herkunft: hermes
+    phase: konzept
+    module: [isds]
+    entscheid: "ISDS-Konzept"
+    zweck: "Konzept für Informationssicherheit und Datenschutz; vertieft die Schutzbedarfsanalyse."
+    zweck_quelle: sinngemaess
+    hinweis: "Wird in Realisierung und Einführung nachgeführt und in der Einführung überführt."
+    wissen:
+      schreibt: [sicherheitsanforderung, datenschutz_anforderung, entscheid]
+      ergaenzt: [datenkategorie, risiko]
+      liest: [systemkomponente, schnittstelle, benutzergruppe, rechtl_grundlage]
+    voraussetzungen:
+      - {id: loesungsanforderungen, basis: phasenmodell}
+      - {id: schutzbedarfsanalyse, basis: pipeline}
+  - id: datenschutzkonzept
+    name: "Datenschutzkonzept"
+    typ: dokument
+    herkunft: csi
+    phase: konzept
+    module: [isds]
+    zweck: "Eigenständiges Konzept nach DSG. In HERMES ist der Datenschutz Teil des ISDS-Konzepts."
+    abgedeckt_durch: isds_konzept
+    wissen:
+      ergaenzt: [datenschutz_anforderung, datenkategorie]
+      liest: [rechtl_grundlage, schnittstelle, benutzergruppe]
+    voraussetzungen:
+      - {id: schutzbedarfsanalyse, basis: pipeline}
+  - id: sicherheitskonzept
+    name: "Sicherheitskonzept"
+    typ: dokument
+    herkunft: csi
+    phase: konzept
+    module: [isds]
+    zweck: "Eigenständiges technisches Sicherheitskonzept. In HERMES Teil des ISDS-Konzepts."
+    abgedeckt_durch: isds_konzept
+    wissen:
+      ergaenzt: [sicherheitsanforderung, technische_anforderung]
+      liest: [systemkomponente, schnittstelle, betriebsumgebung]
+    voraussetzungen:
+      - {id: loesungsarchitektur, basis: pipeline}
+  - id: berechtigungskonzept
+    name: "Berechtigungskonzept"
+    typ: dokument
+    herkunft: csi
+    phase: konzept
+    module: [isds]
+    zweck: "Rollen- und Berechtigungsmodell der Lösung. In HERMES kein eigenes Ergebnis; typischerweise im ISDS-Konzept bzw. im Betriebshandbuch abgedeckt."
+    abgedeckt_durch: isds_konzept
+    wissen:
+      schreibt: [berechtigungsrolle]
+      ergaenzt: [sicherheitsanforderung]
+      liest: [benutzergruppe, systemkomponente, datenkategorie]
+    voraussetzungen:
+      - {id: loesungsarchitektur, basis: pipeline}
+      - {id: isds_konzept, basis: pipeline}
+  - id: schulungskonzept
+    name: "Schulungskonzept"
+    typ: dokument
+    herkunft: csi
+    phase: konzept
+    module: [einfuehrungsorganisation]
+    zweck: "Eigenständiges Ausbildungskonzept. In HERMES Teil des Einführungskonzepts."
+    abgedeckt_durch: einfuehrungskonzept
+    wissen:
+      ergaenzt: [schulungseinheit]
+      liest: [benutzergruppe, systemkomponente]
+    voraussetzungen:
+      - {id: einfuehrungskonzept, basis: pipeline}
+  - id: supportkonzept
+    name: "Supportkonzept"
+    typ: dokument
+    herkunft: csi
+    phase: konzept
+    module: [it_betrieb]
+    zweck: "Support- und Eskalationsorganisation. In HERMES über Betriebskonzept, Service Level Agreement und Betriebshandbuch abgedeckt."
+    abgedeckt_durch: service_level_agreement
+    wissen:
+      ergaenzt: [supportprozess]
+      liest: [benutzergruppe, systemkomponente]
+    voraussetzungen:
+      - {id: betriebskonzept, basis: pipeline}
+
+  # ---------- Realisierung ----------
+  - id: detailspezifikation
+    name: "Detailspezifikation"
+    typ: dokument
+    herkunft: hermes
+    phase: realisierung
+    module: [produkt, it_system, it_migration]
+    zweck: "Präzisiert die Lösung für Entwicklung, Parametrisierung, Schnittstellen und Migration. Agil: Sprint Backlog je Iteration."
+    zweck_quelle: sinngemaess
+    hinweis: "Erscheint im Phasenmodell je Modul: Produkt, IT-System (inkl. Integration) und IT-Migration."
+    wissen:
+      ergaenzt: [anforderung, systemkomponente, schnittstelle, migrationsschritt]
+      liest: [technische_anforderung]
+    voraussetzungen:
+      - {id: produktkonzept, basis: phasenmodell}
+      - {id: loesungsarchitektur, basis: phasenmodell}
+      - {id: integrationskonzept, basis: phasenmodell}
+      - {id: migrationskonzept, basis: phasenmodell}
+  - id: zustand_produkt_entwickelt
+    name: "Produkt entwickelt / angepasst"
+    typ: zustand
+    phase: realisierung
+    module: [produkt]
+    voraussetzungen:
+      - {id: detailspezifikation, basis: phasenmodell}
+  - id: zustand_system_entwickelt
+    name: "System entwickelt / parametrisiert"
+    typ: zustand
+    phase: realisierung
+    module: [it_system]
+    voraussetzungen:
+      - {id: detailspezifikation, basis: phasenmodell}
+  - id: zustand_schnittstellen_realisiert
+    name: "Schnittstellen realisiert"
+    typ: zustand
+    phase: realisierung
+    module: [it_system]
+    voraussetzungen:
+      - {id: detailspezifikation, basis: phasenmodell}
+  - id: anwendungshandbuch
+    name: "Anwendungshandbuch"
+    typ: dokument
+    herkunft: hermes
+    phase: realisierung
+    module: [produkt, it_system]
+    zweck: "Anleitung für Anwenderinnen und Anwender der Lösung."
+    zweck_quelle: sinngemaess
+    hinweis: "Erscheint im Phasenmodell in den Modulen Produkt und IT-System."
+    wissen:
+      liest: [systemkomponente, benutzergruppe, anforderung]
+    voraussetzungen:
+      - {id: zustand_produkt_entwickelt, basis: phasenmodell}
+      - {id: zustand_system_entwickelt, basis: phasenmodell}
+  - id: integrations_installationsanleitung
+    name: "Integrations- und Installationsanleitung"
+    typ: dokument
+    herkunft: hermes
+    phase: realisierung
+    module: [it_system]
+    zweck: "Anleitung zur Installation und Integration der Lösung in die Zielumgebung."
+    zweck_quelle: sinngemaess
+    wissen:
+      liest: [schnittstelle, systemkomponente, betriebsumgebung]
+    voraussetzungen:
+      - {id: zustand_schnittstellen_realisiert, basis: phasenmodell}
+  - id: zustand_organisation_umgesetzt
+    name: "Organisation umgesetzt"
+    typ: zustand
+    phase: realisierung
+    module: [organisation]
+    voraussetzungen:
+      - {id: prozessbeschreibung, basis: phasenmodell}
+      - {id: organisationsbeschreibung, basis: phasenmodell}
+  - id: zustand_testinfrastruktur_realisiert
+    name: "Testinfrastruktur realisiert"
+    typ: zustand
+    phase: realisierung
+    module: [testen]
+    voraussetzungen:
+      - {id: testkonzept, basis: phasenmodell}
+  - id: testprotokoll
+    name: "Testprotokoll"
+    typ: dokument
+    herkunft: hermes
+    phase: realisierung
+    module: [testen]
+    zweck: "Dokumentiert Durchführung und Ergebnisse der Tests."
+    zweck_quelle: sinngemaess
+    wissen:
+      schreibt: [offener_punkt]
+      ergaenzt: [testfall]
+      liest: [anforderung]
+    voraussetzungen:
+      - {id: zustand_testinfrastruktur_realisiert, basis: phasenmodell}
+  - id: zustand_einfuehrungsmassnahmen_realisiert
+    name: "Einführungsmassnahmen realisiert"
+    typ: zustand
+    phase: realisierung
+    module: [einfuehrungsorganisation]
+    voraussetzungen:
+      - {id: einfuehrungskonzept, basis: phasenmodell}
+  - id: zustand_migrationsverfahren_realisiert
+    name: "Migrationsverfahren realisiert"
+    typ: zustand
+    phase: realisierung
+    module: [it_migration]
+    voraussetzungen:
+      - {id: detailspezifikation, basis: phasenmodell}
+  - id: zustand_betriebsinfrastruktur_realisiert
+    name: "Betriebsinfrastruktur realisiert"
+    typ: zustand
+    phase: realisierung
+    module: [it_betrieb]
+    voraussetzungen:
+      - {id: service_level_agreement, basis: phasenmodell}
+  - id: zustand_system_integriert
+    name: "System integriert"
+    typ: zustand
+    phase: realisierung
+    module: [it_betrieb]
+    voraussetzungen:
+      - {id: zustand_betriebsinfrastruktur_realisiert, basis: phasenmodell}
+  - id: betriebshandbuch
+    name: "Betriebshandbuch"
+    typ: dokument
+    herkunft: hermes
+    phase: realisierung
+    module: [it_betrieb]
+    zweck: "Operative Anleitung für den Betrieb der Lösung."
+    zweck_quelle: sinngemaess
+    wissen:
+      ergaenzt: [supportprozess, backup_konzept]
+      liest: [systemkomponente, betriebsumgebung, berechtigungsrolle]
+    voraussetzungen:
+      - {id: service_level_agreement, basis: phasenmodell}
+  - id: zustand_betriebsorganisation_realisiert
+    name: "Betriebsorganisation realisiert"
+    typ: zustand
+    phase: realisierung
+    module: [it_betrieb]
+    voraussetzungen:
+      - {id: betriebshandbuch, basis: phasenmodell}
+  - id: zustand_isds_massnahmen_realisiert
+    name: "ISDS-Massnahmen realisiert"
+    typ: zustand
+    phase: realisierung
+    module: [isds]
+    voraussetzungen:
+      - {id: isds_konzept, basis: phasenmodell}
+  - id: abnahmeprotokoll_vorabnahme
+    name: "Abnahmeprotokoll · Vorabnahme"
+    typ: dokument
+    herkunft: hermes
+    phase: realisierung
+    module: [einfuehrungsorganisation]
+    entscheid: "Vorabnahme"
+    zweck: "Rechtlich verbindliches Dokument. Dokumentiert die Erfüllung der Vereinbarung über Lösungseigenschaften und bestehende Mängel, hier für die Vorabnahme am Ende der Realisierung."
+    zweck_quelle: referenz
+    gliederung:
+      - "Abnahmegegenstand"
+      - "Abnahmebeteiligte"
+      - "Grundlagen"
+      - "Abnahmeverfahren"
+      - "Abnahmekriterien mit Mängelklassen"
+      - "Lieferergebnisse und Mängel inkl. Massnahmen"
+      - "Abnahmeergebnis"
+      - "Unterschriften"
+    wissen:
+      schreibt: [entscheid, offener_punkt]
+      liest: [anforderung, testfall, vertrag, stakeholder]
+    voraussetzungen:
+      - {id: zustand_organisation_umgesetzt, basis: phasenmodell}
+      - {id: anwendungshandbuch, basis: phasenmodell}
+      - {id: integrations_installationsanleitung, basis: phasenmodell}
+      - {id: testprotokoll, basis: phasenmodell}
+      - {id: zustand_einfuehrungsmassnahmen_realisiert, basis: phasenmodell}
+      - {id: zustand_migrationsverfahren_realisiert, basis: phasenmodell}
+      - {id: zustand_system_integriert, basis: phasenmodell}
+      - {id: zustand_betriebsorganisation_realisiert, basis: phasenmodell}
+      - {id: zustand_isds_massnahmen_realisiert, basis: phasenmodell}
+
+  # ---------- Einführung ----------
+  - id: zustand_organisation_aktiviert
+    name: "Organisation aktiviert"
+    typ: zustand
+    phase: einfuehrung
+    module: [organisation]
+    voraussetzungen:
+      - {id: abnahmeprotokoll_vorabnahme, basis: phasenmodell}
+  - id: zustand_produkt_aktiviert
+    name: "Produkt aktiviert"
+    typ: zustand
+    phase: einfuehrung
+    module: [produkt]
+    voraussetzungen:
+      - {id: abnahmeprotokoll_vorabnahme, basis: phasenmodell}
+  - id: zustand_system_aktiviert
+    name: "System aktiviert"
+    typ: zustand
+    phase: einfuehrung
+    module: [it_system]
+    voraussetzungen:
+      - {id: abnahmeprotokoll_vorabnahme, basis: phasenmodell}
+  - id: zustand_einfuehrungsmassnahmen_durchgefuehrt
+    name: "Einführungsmassnahmen durchgeführt"
+    typ: zustand
+    phase: einfuehrung
+    module: [einfuehrungsorganisation]
+    voraussetzungen:
+      - {id: abnahmeprotokoll_vorabnahme, basis: phasenmodell}
+  - id: zustand_migration_durchgefuehrt
+    name: "Migration durchgeführt"
+    typ: zustand
+    phase: einfuehrung
+    module: [it_migration]
+    voraussetzungen:
+      - {id: abnahmeprotokoll_vorabnahme, basis: phasenmodell}
+  - id: zustand_betrieb_aktiviert
+    name: "Betrieb aktiviert"
+    typ: zustand
+    phase: einfuehrung
+    module: [it_betrieb]
+    voraussetzungen:
+      - {id: abnahmeprotokoll_vorabnahme, basis: phasenmodell}
+  - id: zustand_isds_konzept_ueberfuehrt
+    name: "ISDS-Konzept überführt"
+    typ: zustand
+    phase: einfuehrung
+    module: [isds]
+    voraussetzungen:
+      - {id: abnahmeprotokoll_vorabnahme, basis: phasenmodell}
+  - id: abnahmeprotokoll_abnahme
+    name: "Abnahmeprotokoll · Abnahme"
+    typ: dokument
+    herkunft: hermes
+    phase: einfuehrung
+    module: [einfuehrungsorganisation]
+    entscheid: "Abnahme"
+    zweck: "Rechtlich verbindliches Dokument. Dokumentiert die Erfüllung der Vereinbarung über Lösungseigenschaften und bestehende Mängel, hier für die Abnahme in der Einführung."
+    zweck_quelle: referenz
+    gliederung:
+      - "Abnahmegegenstand"
+      - "Abnahmebeteiligte"
+      - "Grundlagen"
+      - "Abnahmeverfahren"
+      - "Abnahmekriterien mit Mängelklassen"
+      - "Lieferergebnisse und Mängel inkl. Massnahmen"
+      - "Abnahmeergebnis"
+      - "Unterschriften"
+    wissen:
+      schreibt: [entscheid, offener_punkt]
+      liest: [anforderung, testfall, vertrag, stakeholder]
+    voraussetzungen:
+      - {id: zustand_organisation_aktiviert, basis: phasenmodell}
+      - {id: zustand_produkt_aktiviert, basis: phasenmodell}
+      - {id: zustand_system_aktiviert, basis: phasenmodell}
+      - {id: zustand_einfuehrungsmassnahmen_durchgefuehrt, basis: phasenmodell}
+      - {id: zustand_migration_durchgefuehrt, basis: phasenmodell}
+      - {id: zustand_betrieb_aktiviert, basis: phasenmodell}
+      - {id: zustand_isds_konzept_ueberfuehrt, basis: phasenmodell}
+
+  # ---------- Abschluss ----------
+  - id: zustand_altsystem_entfernt
+    name: "Altsystem entfernt"
+    typ: zustand
+    phase: abschluss
+    module: [it_migration]
+    voraussetzungen:
+      - {id: zustand_migration_durchgefuehrt, basis: phasenmodell}
+  - id: zustand_testinfrastruktur_ueberfuehrt
+    name: "Testinfrastruktur überführt"
+    typ: zustand
+    phase: abschluss
+    module: [testen]
+    voraussetzungen:
+      - {id: testkonzept, basis: phasenmodell}
+      - {id: abnahmeprotokoll_abnahme, basis: pipeline}
+  - id: projektschlussbeurteilung
+    name: "Projektschlussbeurteilung"
+    typ: dokument
+    herkunft: hermes
+    phase: abschluss
+    module: [projektsteuerung]
+    entscheid: "Projektabschluss"
+    zweck: "Grundlage für den Entscheid zum Projektabschluss. Soll-Ist-Vergleich zu Zielen, Terminen und Finanzen."
+    zweck_quelle: referenz
+    gliederung:
+      - "Ausgangslage"
+      - "Beurteilung der Zielerreichung"
+      - "Wirtschaftlichkeit"
+      - "Soll-Ist-Vergleich (Kosten, Aufwand, Termine, Ergebnisse)"
+      - "Projekterfahrungen"
+      - "Pendenzen und Massnahmen"
+      - "Antrag"
+    wissen:
+      liest: [ausgangslage, ziel, kosten, phase_execution, erfahrung, offener_punkt, entscheid]
+    voraussetzungen:
+      - {id: projekterfahrungen, basis: phasenmodell}
+      - {id: phasenbericht, basis: pipeline}
+      - {id: abnahmeprotokoll_abnahme, basis: pipeline}
+
+  # ---------- Phasenunabhängig ----------
+  - id: projektstatusbericht
+    name: "Projektstatusbericht"
+    typ: dokument
+    herkunft: hermes
+    phase: phasenunabhaengig
+    module: [projektsteuerung]
+    pipeline_status: naechste_session
+    zweck: "Periodische Berichterstattung über Projektstand, Fortschritt und Prognosen. Art und Frequenz gemäss Projektmanagementplan."
+    zweck_quelle: referenz
+    gliederung:
+      - "Übersicht Projektstand"
+      - "Prognose der Zielerreichung (agil: Burn-Down-Diagramm)"
+      - "Soll-Ist-Vergleich und Prognosen"
+      - "Probleme und Massnahmen"
+      - "Risiken"
+      - "Ausblick"
+    wissen:
+      schreibt: [offener_punkt]
+      ergaenzt: [risiko, phase_execution, kosten]
+      liest: [ziel, entscheid, stakeholder]
+    voraussetzungen:
+      - {id: projektmanagementplan, basis: phasenmodell}
+  - id: phasenbericht
+    name: "Phasenbericht"
+    typ: dokument
+    herkunft: hermes
+    phase: phasenunabhaengig
+    module: [projektsteuerung]
+    nur_vorgehen: klassisch
+    entscheid: "Phasenfreigabe"
+    pipeline_status: roadmap
+    zweck: "Grundlage für den Entscheid über die Freigabe der nächsten Phase. Fasst Ergebnisse und Entscheide der aktuellen Phase zusammen."
+    zweck_quelle: referenz
+    hinweis: "Am Ende jeder Phase. Bei agiler Vorgehensweise übernimmt der Releasebericht diese Rolle."
+    gliederung:
+      - "Ausgangslage"
+      - "Strategiebezug und Umsetzung von Vorgaben"
+      - "Nutzen und Wirtschaftlichkeit"
+      - "Rechtliche Grundlagen"
+      - "Planung und Organisation"
+      - "Prognose der Zielerreichung und Lösungen"
+      - "Probleme und Massnahmen"
+      - "Risiken"
+      - "Anträge"
+      - "Fazit"
+    wissen:
+      schreibt: [entscheid]
+      ergaenzt: [risiko]
+      liest: [ausgangslage, kosten, phase_execution, rechtl_grundlage, offener_punkt, ziel]
+    voraussetzungen:
+      - {id: projektstatusbericht, basis: pipeline}
+  - id: releasebericht
+    name: "Releasebericht"
+    typ: dokument
+    herkunft: hermes
+    phase: phasenunabhaengig
+    module: [projektsteuerung]
+    nur_vorgehen: agil
+    entscheid: "Releasefreigabe"
+    zweck: "Übersicht über den bisherigen Projekterfolg im Rahmen der agilen Vorgehensweise. Grundlage für den Projektstatusbericht und ggf. die Releasefreigabe."
+    zweck_quelle: referenz
+    gliederung:
+      - "Ausgangslage"
+      - "Strategiebezug und Umsetzung von Vorgaben"
+      - "Nutzen und Wirtschaftlichkeit"
+      - "Inhalt des Release"
+      - "Bekannte Fehler"
+      - "Burn-Down-Diagramm"
+      - "Risiken"
+      - "Fazit"
+    wissen:
+      schreibt: [offener_punkt]
+      ergaenzt: [risiko]
+      liest: [ausgangslage, anforderung, kosten]
+    voraussetzungen:
+      - {id: projektmanagementplan, basis: phasenmodell}
+  - id: qs_risikobericht
+    name: "QS- und Risikobericht"
+    typ: dokument
+    herkunft: hermes
+    phase: phasenunabhaengig
+    module: [projektsteuerung]
+    zweck: "Vom Qualitäts- und Risikomanager (QRM) erstellt. Informiert aus unabhängiger Sicht über Qualität und Risikosituation des Projekts."
+    zweck_quelle: referenz
+    gliederung:
+      - "Auftrag und Abgrenzung"
+      - "Vorgehensweise"
+      - "Gesamtbeurteilung mit Projektstatus"
+      - "Qualitätsbeurteilung"
+      - "Risikobeurteilung"
+      - "Empfehlungen"
+    wissen:
+      ergaenzt: [risiko]
+      liest: [anforderung, entscheid, phase_execution, kosten]
+    voraussetzungen:
+      - {id: projektmanagementplan, basis: pipeline}
+  - id: aenderungsantrag
+    name: "Änderungsantrag"
+    typ: dokument
+    herkunft: hermes
+    phase: phasenunabhaengig
+    module: [projektsteuerung]
+    zweck: "Grundlage für eine inhaltliche Änderung (klassisch). Agil: bei Änderungen, die Projektziele, Budget oder Zeitrahmen tangieren."
+    zweck_quelle: referenz
+    hinweis: "Im Wissensspeicher der Auslöser für Revisionen: Ein bewilligter Antrag ersetzt bestehende Einträge (Status «superseded» bzw. «reverted») und markiert betroffene Dokumente als «potentially stale»."
+    gliederung:
+      - "Änderungsantrag Nummer"
+      - "Antragsteller"
+      - "Antragsdatum"
+      - "Änderungsgrund"
+      - "Änderungsbeschreibung"
+      - "Angaben zur Ausführung"
+      - "Lösungsvorschlag"
+      - "Beurteilung der Auswirkungen (Aufwand, Kosten, Termin, Risiken)"
+    wissen:
+      schreibt: [entscheid]
+      ergaenzt: [anforderung, kosten, phase_execution, risiko]
+      liest: [ziel]
+    voraussetzungen:
+      - {id: durchfuehrungsauftrag, basis: pipeline}
+  - id: aenderungsstatusliste
+    name: "Änderungsstatusliste"
+    typ: dokument
+    herkunft: hermes
+    phase: phasenunabhaengig
+    module: [projektsteuerung]
+    zweck: "Aufzählung und Überwachung aller Änderungen; unterstützt die Nachvollziehbarkeit des Projektverlaufs."
+    zweck_quelle: referenz
+    gliederung:
+      - "Je Änderung: Nummer, Antragsteller, Datum, Kurzbeschreibung, Entscheidungsverantwortlicher, Status, Änderungsdatum, Verantwortlich, Aufwand/Kosten/Auswirkungen"
+    wissen:
+      liest: [entscheid]
+    voraussetzungen:
+      - {id: aenderungsantrag, basis: pipeline}
+  - id: projektentscheide
+    name: "Projektentscheide"
+    typ: dokument
+    herkunft: hermes
+    phase: phasenunabhaengig
+    module: [projektsteuerung]
+    zweck: "Hält die im Projekt getroffenen Entscheide fest."
+    zweck_quelle: sinngemaess
+    hinweis: "Im Wissensspeicher die kanonische Liste aller Einträge vom Typ «entscheid»."
+    wissen:
+      schreibt: [entscheid]
+      liest: [stakeholder]
+  - id: projekterfahrungen
+    name: "Projekterfahrungen"
+    typ: dokument
+    herkunft: hermes
+    phase: phasenunabhaengig
+    module: [projektsteuerung]
+    zweck: "Systematisch gesammelte Projekterfahrungen als Rückblick; unterstützt den kontinuierlichen Verbesserungsprozess."
+    zweck_quelle: referenz
+    gliederung:
+      - "Je Erfahrung: Kontakt, Themengebiet, Datum, positiv/negativ, Relevanz, mögliche Ursachen, Empfehlung"
+    wissen:
+      schreibt: [erfahrung]
+  - id: protokoll
+    name: "Protokoll"
+    typ: dokument
+    herkunft: vorlage
+    phase: phasenunabhaengig
+    module: [projektsteuerung]
+    zweck: "Dokumentiert Entscheide, Aufträge und wichtige Punkte aus Besprechungen; Aufträge werden in einer Pendenzenliste verwaltet."
+    hinweis: "Wichtigste laufende Quelle für Entscheide und Pendenzen. In der Pipeline wie ein hochgeladenes Quelldokument behandeln."
+    gliederung:
+      - "Kopfbereich (Sitzungsart, Datum, Leitung, Teilnehmende)"
+      - "Traktanden"
+      - "Beschlussliste"
+      - "Pendenzenliste (Anhang)"
+    wissen:
+      schreibt: [entscheid, offener_punkt]
+      liest: [stakeholder]
+  - id: arbeitsauftrag
+    name: "Arbeitsauftrag"
+    typ: dokument
+    herkunft: vorlage
+    phase: phasenunabhaengig
+    module: [projektsteuerung]
+    zweck: "Erteilt Projektmitarbeitenden Aufträge im Rahmen der Projektplanung, -führung und -kontrolle; intern oder extern vergebbar."
+    gliederung:
+      - "Arbeitsziele"
+      - "Ergebnisse"
+      - "Abgrenzung"
+      - "Voraussetzungen und Abhängigkeiten"
+      - "Liste der Aktivitäten"
+      - "Ressourcenbedarf"
+      - "Ergebnisdarstellung"
+      - "Qualitätssicherung"
+    wissen:
+      liest: [ziel, phase_execution, anforderung]
+    voraussetzungen:
+      - {id: projektmanagementplan, basis: pipeline}

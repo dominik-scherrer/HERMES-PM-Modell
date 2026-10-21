@@ -1,0 +1,17 @@
+name: HERMES-Modell prüfen
+on: [push, pull_request]
+jobs:
+  pruefen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Modell validieren
+        run: python scripts/validate.py
+      - name: Skill-Referenzen sind aktuell
+        run: |
+          python scripts/build_skill_refs.py
+          git diff --exit-code -- skill/ || (echo "Skill-Referenzen veraltet: python scripts/build_skill_refs.py ausführen und committen." && exit 1)
